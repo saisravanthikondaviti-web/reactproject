@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,36 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+body {
+  margin: 0;
+  background-color: #0f172a;
+  color: #00ffcc;
+  font-family: "Courier New", monospace;
+  text-align: center;
+}
+
+.container {
+  padding: 40px;
+}
+
+input {
+  padding: 8px;
+  margin: 10px;
+  background: black;
+  color: #00ffcc;
+  border: 1px solid #00ffcc;
+}
+
+button {
+  padding: 8px 15px;
+  background: #00ffcc;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+button:hover {
+  background: #00ccaa;
 }

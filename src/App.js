@@ -29,6 +29,8 @@ import "./App.css";
 import Timer from "./components/Timer";
 import PuzzleOne from "./components/PuzzleOne";
 import PuzzleTwo from "./components/PuzzleTwo";
+import PuzzleThree from "./components/PuzzleThree";
+
 
 
 function App() {
@@ -76,6 +78,11 @@ function App() {
       {level === 2 && (
         <PuzzleTwo onSuccess={nextLevel} onFail={reduceScore} />
       )}
+
+      {level === 3 && (
+        <PuzzleThree onSuccess={nextLevel} onFail={reduceScore} />
+      )}
+
 
     </div>
   );

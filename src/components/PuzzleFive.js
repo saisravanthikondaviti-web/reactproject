@@ -1,112 +1,64 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function PuzzleFive({ onSuccess, onFail }) {
-  const [position, setPosition] = useState({ top: 200, left: 200 });
-  const [shiftPressed, setShiftPressed] = useState(false);
-  const [message, setMessage] = useState("🚨 Click ESCAPE to override system.");
-  const [fakeButtons, setFakeButtons] = useState([]);
+  const [switches, setSwitches] = useState({
+    A: false,
+    B: false,
+    C: false,
+    D: false,
+  });
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Shift") {
-        setShiftPressed(true);
-        setMessage("👁 SYSTEM: Hidden key detected...");
-      }
-    };
+  const [message, setMessage] = useState("");
 
-    const handleKeyUp = (e) => {
-      if (e.key === "Shift") {
-        setShiftPressed(false);
-        setMessage("🚨 Click ESCAPE to override system.");
-      }
-    };
+  const toggleSwitch = (key) => {
+    setSwitches({ ...switches, [key]: !switches[key] });
+  };
 
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
+  const checkLogic = () => {
+    const { A, B, C, D } = switches;
 
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-    };
-  }, []);
+    const result = (A && B) || (C !== D); // XOR = !==
 
-  const moveButton = () => {
-    if (!shiftPressed) {
-      setPosition({
-        top: Math.random() * 400,
-        left: Math.random() * 400,
-      });
-
-      // Create fake buttons randomly
-      const newFake = {
-        top: Math.random() * 400,
-        left: Math.random() * 400,
-      };
-      setFakeButtons((prev) => [...prev, newFake]);
-
-      setMessage("❌ ACCESS DENIED");
+    if (result) {
+      setMessage("🚀 Logic TRUE. Door Unlocked!");
+      setTimeout(() => {
+        onSuccess();
+      }, 1500);
+    } else {
+      setMessage("❌ Logic FALSE. Try again.");
       onFail();
     }
   };
 
-  const handleRealClick = () => {
-    if (shiftPressed) {
-      setMessage("💀 SYSTEM BREACHED...");
-      setTimeout(() => {
-        onSuccess();
-      }, 1500);
-    }
-  };
-
   return (
-    <div
-      style={{
-        height: "500px",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      <h2>⚠ CHAOS PROTOCOL ACTIVATED</h2>
-      <p>{message}</p>
+    <div style={{ marginTop: "40px" }}>
+      <h2>🧠 Final Logic Gate</h2>
+      <p>Door opens only when:</p>
+      <strong>(A AND B) OR (C XOR D)</strong>
 
-      {/* REAL BUTTON */}
-      <button
-        onMouseEnter={moveButton}
-        onClick={handleRealClick}
-        style={{
-          position: "absolute",
-          top: position.top,
-          left: position.left,
-          padding: "15px 25px",
-          cursor: "pointer",
-          background: "red",
-          color: "white",
-        }}
-      >
-        🚪 ESCAPE
+      <div style={{ marginTop: "20px" }}>
+        {Object.keys(switches).map((key) => (
+          <button
+            key={key}
+            onClick={() => toggleSwitch(key)}
+            style={{
+              margin: "10px",
+              padding: "15px",
+              background: switches[key] ? "#00ffcc" : "#111",
+              color: switches[key] ? "#000" : "#00ffcc",
+              border: "1px solid #00ffcc",
+            }}
+          >
+            {key}: {switches[key] ? "ON" : "OFF"}
+          </button>
+        ))}
+      </div>
+
+      <button onClick={checkLogic} style={{ marginTop: "20px" }}>
+        Check System
       </button>
 
-      {/* FAKE BUTTONS */}
-      {fakeButtons.map((btn, index) => (
-        <button
-          key={index}
-          onClick={() => {
-            setMessage("💀 Fake terminal triggered!");
-            onFail();
-          }}
-          style={{
-            position: "absolute",
-            top: btn.top,
-            left: btn.left,
-            padding: "15px 25px",
-            background: "black",
-            color: "red",
-            border: "1px solid red",
-          }}
-        >
-          🚪 ESCAPE
-        </button>
-      ))}
+      <p>{message}</p>
     </div>
   );
 }

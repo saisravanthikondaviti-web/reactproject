@@ -30,6 +30,10 @@ import Timer from "./components/Timer";
 import PuzzleOne from "./components/PuzzleOne";
 import PuzzleTwo from "./components/PuzzleTwo";
 import PuzzleThree from "./components/PuzzleThree";
+import PuzzleFour from "./components/PuzzleFour";
+import PuzzleFive from "./components/PuzzleFive";
+
+
 
 
 
@@ -82,6 +86,15 @@ function App() {
       {level === 3 && (
         <PuzzleThree onSuccess={nextLevel} onFail={reduceScore} />
       )}
+
+      {level === 4 && (
+        <PuzzleFour onSuccess={nextLevel} onFail={reduceScore} />
+      )}
+
+      {level === 5 && (
+        <PuzzleFive onSuccess={nextLevel} onFail={reduceScore} />
+      )}
+
 
 
     </div>

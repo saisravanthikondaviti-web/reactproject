@@ -68,3 +68,28 @@ button {
 button:hover {
   background: #00ccaa;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.box {
+  width: 80px;
+  height: 80px;
+  background: #111;
+  border: 2px solid #00ffcc;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.box:hover {
+  background: #003333;
+}
+
+.box.active {
+  background: #00ffcc;
+}

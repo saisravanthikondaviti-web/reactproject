@@ -28,6 +28,8 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Timer from "./components/Timer";
 import PuzzleOne from "./components/PuzzleOne";
+import PuzzleTwo from "./components/PuzzleTwo";
+
 
 function App() {
   const [level, setLevel] = useState(1);
@@ -70,6 +72,11 @@ function App() {
       {level === 1 && (
         <PuzzleOne onSuccess={nextLevel} onFail={reduceScore} />
       )}
+
+      {level === 2 && (
+        <PuzzleTwo onSuccess={nextLevel} onFail={reduceScore} />
+      )}
+
     </div>
   );
 }

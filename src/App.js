@@ -1,105 +1,78 @@
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
-import Timer from "./components/Timer";
+
 import PuzzleOne from "./components/PuzzleOne";
 import PuzzleTwo from "./components/PuzzleTwo";
 import PuzzleThree from "./components/PuzzleThree";
 import PuzzleFour from "./components/PuzzleFour";
 import PuzzleFive from "./components/PuzzleFive";
-
-
-
-
+import Timer from "./components/Timer";
 
 function App() {
-  const [level, setLevel] = useState(1);
-  const [score, setScore] = useState(100);
-  const [timeLeft, setTimeLeft] = useState(180);
-  const [gameOver, setGameOver] = useState(false);
+  const [level, setLevel] = useState(0);
+  const [startTime, setStartTime] = useState(null);
+  const [finished, setFinished] = useState(false);
 
-  useEffect(() => {
-    if (timeLeft <= 0) {
-      setGameOver(true);
-    }
-  }, [timeLeft]);
+  const startGame = () => {
+    setStartTime(Date.now());
+    setLevel(1);
+  };
 
   const nextLevel = () => {
-    setLevel((prev) => prev + 1);
+    if (level < 5) {
+      setLevel(level + 1);
+    } else {
+      setFinished(true);
+    }
   };
 
-  const reduceScore = () => {
-    setScore((prev) => prev - 10);
+  const getPuzzle = () => {
+    switch (level) {
+      case 1: return <PuzzleOne onSuccess={nextLevel} />;
+      case 2: return <PuzzleTwo onSuccess={nextLevel} />;
+      case 3: return <PuzzleThree onSuccess={nextLevel} />;
+      case 4: return <PuzzleFour onSuccess={nextLevel} />;
+      case 5: return <PuzzleFive onSuccess={nextLevel} />;
+      default: return null;
+    }
   };
 
-  if (gameOver) {
-    return (
-      <div className="container">
-        <h1>💀 SYSTEM LOCKED</h1>
-        <h2>Your Score: {score}</h2>
-      </div>
-    );
-  }
+  const getFinalTime = () => {
+    return Math.floor((Date.now() - startTime) / 1000);
+  };
 
   return (
-    <div className="container">
-      <h1>🧑‍💻 Escape The Hacker Lab</h1>
+    <div className="app">
 
-      <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} />
-
-      <p>Level: {level}</p>
-      <p>Score: {score}</p>
-
-      {level === 1 && (
-        <PuzzleOne onSuccess={nextLevel} onFail={reduceScore} />
+      {level === 0 && !finished && (
+        <div className="hero">
+          <h1>🧠 MindMaze</h1>
+          <p>Only the sharpest minds survive.</p>
+          <button onClick={startGame}>Start Challenge</button>
+        </div>
       )}
 
-      {level === 2 && (
-        <PuzzleTwo onSuccess={nextLevel} onFail={reduceScore} />
+      {level > 0 && !finished && (
+        <>
+          <Timer startTime={startTime} />
+          {getPuzzle()}
+        </>
       )}
 
-      {level === 3 && (
-        <PuzzleThree onSuccess={nextLevel} onFail={reduceScore} />
+      {finished && (
+        <div className="final-screen">
+          <div className="final-card">
+            <h1>🏆 You Conquered All Levels!</h1>
+            <p>Total Time: {getFinalTime()} seconds</p>
+            <button onClick={() => window.location.reload()}>
+              Play Again
+            </button>
+          </div>
+        </div>
       )}
-
-      {level === 4 && (
-        <PuzzleFour onSuccess={nextLevel} onFail={reduceScore} />
-      )}
-
-      {level === 5 && (
-        <PuzzleFive onSuccess={nextLevel} onFail={reduceScore} />
-      )}
-
-
 
     </div>
   );
 }
 
 export default App;
-

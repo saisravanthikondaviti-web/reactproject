@@ -1,122 +1,86 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
 body {
   margin: 0;
-  background-color: #0f172a;
-  color: #00ffcc;
-  font-family: "Courier New", monospace;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  overflow-x: hidden;
+}
+
+.app {
   text-align: center;
+  min-height: 100vh;
 }
 
-.container {
-  padding: 40px;
-}
-
-input {
-  padding: 8px;
-  margin: 10px;
-  background: black;
-  color: #00ffcc;
-  border: 1px solid #00ffcc;
-}
-
-button {
-  padding: 8px 15px;
-  background: #00ffcc;
-  border: none;
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-button:hover {
-  background: #00ccaa;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 80px);
-  gap: 10px;
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin: 20px 0;
+  align-items: center;
+  background: radial-gradient(circle at top, #1e3a8a, #0f172a);
 }
 
-.box {
-  width: 80px;
-  height: 80px;
-  background: #111;
-  border: 2px solid #00ffcc;
-  cursor: pointer;
-  transition: 0.3s;
+.hero h1 {
+  font-size: 4rem;
+  text-shadow: 0 0 20px #6366f1;
 }
 
-.box:hover {
-  background: #003333;
-}
-
-.box.active {
-  background: #00ffcc;
-}
-
-.color-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 100px);
-  gap: 15px;
-  justify-content: center;
+.hero button {
   margin-top: 20px;
-}
-
-.color-box {
-  width: 100px;
-  height: 100px;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  background: #6366f1;
+  color: white;
   cursor: pointer;
-  border-radius: 10px;
-  opacity: 0.7;
   transition: 0.3s;
 }
 
-.color-box.active {
-  opacity: 1;
+.hero button:hover {
   transform: scale(1.1);
+  background: #4f46e5;
 }
 
-.red { background: red; }
-.blue { background: blue; }
-.green { background: green; }
-.yellow { background: gold; }
+/* PUZZLE CARD */
+.puzzle-card {
+  margin-top: 100px;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(99,102,241,0.5);
+}
+
+.puzzle-card input {
+  padding: 10px;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+}
+
+/* FINAL SCREEN */
+.final-screen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.final-card {
+  background: rgba(255,255,255,0.08);
+  padding: 60px;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  animation: pop 1s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

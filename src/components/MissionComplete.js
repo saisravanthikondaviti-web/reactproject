@@ -30,7 +30,8 @@ const styles = {
     background: "radial-gradient(circle at center, #0f2027, #203a43, #2c5364)",
   },
   card: {
-    width: "480px",
+    width: "90%",
+    maxWidth: "480px",
     padding: "50px 40px",
     borderRadius: "25px",
     background: "linear-gradient(145deg, #111, #1c1c1c)",

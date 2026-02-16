@@ -81,8 +81,8 @@ function App() {
  return (
   <Container fluid className="min-vh-100 d-flex align-items-center justify-content-center bg-dark py-5">
     <Row className="w-100 justify-content-center">
-      <Col md={8} lg={7}>
-        <Card className="shadow-lg border-0 rounded-4 p-4 bg-secondary text-light">
+      <Col xs={11} sm={10} md={8} lg={7}>
+        <Card className="game-card shadow-lg border-0 rounded-4 p-4 bg-secondary text-light">
 
           <Card.Body className="px-4 py-4">
 

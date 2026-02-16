@@ -96,20 +96,22 @@ button:hover {
 
 .color-grid {
   display: grid;
-  grid-template-columns: repeat(2, 100px);
+  grid-template-columns: repeat(2, 1fr);
   gap: 15px;
   justify-content: center;
-  margin-top: 20px;
+  max-width: 300px;
+  margin: auto;
 }
 
 .color-box {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 15px;
   cursor: pointer;
-  border-radius: 10px;
-  opacity: 0.7;
-  transition: 0.3s;
+  transition: 0.2s;
 }
+
+
 
 .color-box.active {
   opacity: 1;
@@ -139,20 +141,21 @@ button:hover {
 
 .color-grid {
   display: grid;
-  grid-template-columns: repeat(2, 120px);
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
   justify-content: center;
-  margin-top: 20px;
+  max-width: 300px;
+  margin: auto;
 }
 
 .color-box {
-  width: 120px;
-  height: 120px;
-  border-radius: 16px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 15px;
   cursor: pointer;
-  transition: 0.2s ease;
-  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  transition: 0.2s;
 }
+
 
 .color-box.active {
   transform: scale(1.1);
@@ -204,3 +207,22 @@ button:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(255, 81, 47, 0.6);
 }
+
+@media (max-width: 576px) {
+  .game-card {
+    padding: 20px !important;
+  }
+
+  h1 {
+    font-size: clamp(22px, 5vw, 32px);
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .badge {
+    font-size: 0.8rem !important;
+  }
+}
+

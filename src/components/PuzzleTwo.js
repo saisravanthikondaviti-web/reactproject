@@ -1,52 +1,72 @@
 import { useState } from "react";
+import { Card, Badge, Button } from "react-bootstrap";
 
 function PuzzleTwo({ onSuccess, onFail }) {
-  const correctPattern = [0, 1, 2, 5, 8];
+
+  const correctPattern = [0, 1, 2]; // change pattern if you want
 
   const [selected, setSelected] = useState([]);
   const [attempts, setAttempts] = useState(3);
-  const [message, setMessage] = useState("");
 
-  const handleClick = (index) => {
+  // Create 9 grid cells
+  const grid = Array.from({ length: 9 });
+
+  const handleSelect = (index) => {
     if (!selected.includes(index)) {
       setSelected([...selected, index]);
     }
   };
 
-  const checkPattern = () => {
+  const handleUnlock = () => {
     if (JSON.stringify(selected) === JSON.stringify(correctPattern)) {
-      setMessage("🔓 Pattern Correct!");
-      setTimeout(() => {
-        onSuccess();
-      }, 1000);
+      onSuccess();
     } else {
       setAttempts((prev) => prev - 1);
       onFail();
-      setMessage("❌ Wrong Pattern");
       setSelected([]);
+
+      if (attempts - 1 === 0) {
+        alert("💀 Security Locked!");
+      }
     }
   };
 
   return (
-    <div style={{ marginTop: "30px" }}>
-      <h2>Pattern Lock Security</h2>
-      <p>Attempts Left: {attempts}</p>
+    <Card className="bg-black text-light border-0 shadow-lg rounded-4 p-3 mt-4">
 
-      <div className="grid">
-        {[...Array(9)].map((_, index) => (
-          <div
-            key={index}
-            className={`box ${selected.includes(index) ? "active" : ""}`}
-            onClick={() => handleClick(index)}
-          />
-        ))}
-      </div>
+      <Card.Body className="text-center">
 
-      <button onClick={checkPattern}>Unlock</button>
-      <p>{message}</p>
+        <h3 className="fw-bold text-info mb-3">
 
-      {attempts === 0 && <p>💀 System Locked!</p>}
-    </div>
+          🔐 Pattern Lock Security
+        </h3>
+
+        <Badge bg="danger" className="mb-4 px-4 py-2 fs-6">
+          Attempts Left: {attempts}
+        </Badge>
+
+        <div className="pattern-grid mb-4">
+          {grid.map((_, index) => (
+            <div
+              key={index}
+              className={`pattern-node ${
+                selected.includes(index) ? "active" : ""
+              }`}
+              onClick={() => handleSelect(index)}
+            />
+          ))}
+        </div>
+
+        <Button
+          variant="success"
+          className="px-5 py-2 fw-semibold"
+          onClick={handleUnlock}
+        >
+          Unlock
+        </Button>
+
+      </Card.Body>
+    </Card>
   );
 }
 

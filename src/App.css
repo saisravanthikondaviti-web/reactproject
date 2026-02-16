@@ -167,3 +167,30 @@ button:hover {
 .color-box:hover {
   transform: scale(1.05);
 }
+
+.pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 70px);
+  gap: 18px;
+  justify-content: center;
+}
+
+.pattern-node {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #111;
+  border: 2px solid #00f5d4;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 0 8px rgba(0, 255, 200, 0.2);
+}
+
+.pattern-node:hover {
+  transform: scale(1.05);
+}
+
+.pattern-node.active {
+  background: #00f5d4;
+  box-shadow: 0 0 20px #00f5d4;
+}

@@ -74,65 +74,74 @@ function App() {
     );
   }
 
-  return (
-    <Container fluid className="bg-dark text-light min-vh-100 py-5">
-      <Row className="justify-content-center">
-        <Col md={8}>
-          <Card className="shadow-lg p-4 bg-secondary text-light">
-            <Card.Body>
+ return (
+  <Container fluid className="min-vh-100 d-flex align-items-center justify-content-center bg-dark py-5">
+    <Row className="w-100 justify-content-center">
+      <Col md={8} lg={7}>
+        <Card className="shadow-lg border-0 rounded-4 p-4 bg-secondary text-light">
 
-              {/* Header */}
-              <h1 className="text-center mb-4">
+          <Card.Body className="px-4 py-4">
+
+            {/* HEADER */}
+            <div className="text-center mb-4">
+              <h1 className="fw-bold mb-3">
                 🧑‍💻 Escape The Hacker Lab
               </h1>
 
-              {/* Status Bar */}
-              <Row className="mb-3 text-center">
-                <Col>
-                  <Badge bg="info" className="p-2 fs-6">
-                    ⏳ Time: {timeLeft}s
-                  </Badge>
-                </Col>
-                <Col>
-                  <Badge bg="warning" className="p-2 fs-6 text-dark">
-                    🎯 Level: {level}
-                  </Badge>
-                </Col>
-                <Col>
-                  <Badge bg="success" className="p-2 fs-6">
-                    💰 Score: {score}
-                  </Badge>
-                </Col>
-              </Row>
+              {/* STATUS BADGES */}
+              <div className="d-flex justify-content-center gap-4 flex-wrap">
+                <Badge bg="info" className="px-4 py-2 fs-6">
+                  ⏳ Time: {timeLeft}s
+                </Badge>
 
-              {/* Timer */}
-              <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} />
+                <Badge bg="warning" text="dark" className="px-4 py-2 fs-6">
+                  🎯 Level: {level}
+                </Badge>
 
-              {/* Puzzle Area */}
-              <div className="mt-4">
-                {level === 1 && (
-                  <PuzzleOne onSuccess={nextLevel} onFail={reduceScore} />
-                )}
-                {level === 2 && (
-                  <PuzzleTwo onSuccess={nextLevel} onFail={reduceScore} />
-                )}
-                {level === 3 && (
-                  <PuzzleThree onSuccess={nextLevel} onFail={reduceScore} />
-                )}
-                {level === 4 && (
-                  <PuzzleFour onSuccess={nextLevel} onFail={reduceScore} />
-                )}
-                {level === 5 && (
-                  <PuzzleFive onSuccess={nextLevel} onFail={reduceScore} />
-                )}
+                <Badge bg="success" className="px-4 py-2 fs-6">
+                  💰 Score: {score}
+                </Badge>
               </div>
+            </div>
 
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
-  );
+            {/* TIMER COMPONENT */}
+            <div className="text-center mb-4">
+              <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} />
+            </div>
+
+            {/* PUZZLE AREA */}
+            <div className="mt-4 px-3 py-4 bg-dark rounded-4 shadow-sm">
+
+              {level === 1 && (
+                <PuzzleOne onSuccess={nextLevel} onFail={reduceScore} />
+              )}
+
+              {level === 2 && (
+                <PuzzleTwo onSuccess={nextLevel} onFail={reduceScore} />
+              )}
+
+              {level === 3 && (
+                <PuzzleThree onSuccess={nextLevel} onFail={reduceScore} />
+              )}
+
+              {level === 4 && (
+                <PuzzleFour onSuccess={nextLevel} onFail={reduceScore} />
+              )}
+
+              {level === 5 && (
+                <PuzzleFive onSuccess={nextLevel} onFail={reduceScore} />
+              )}
+
+            </div>
+
+          </Card.Body>
+
+        </Card>
+      </Col>
+    </Row>
+  </Container>
+);
+
 }
 
 export default App;

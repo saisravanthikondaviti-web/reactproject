@@ -120,3 +120,19 @@ button:hover {
 .blue { background: blue; }
 .green { background: green; }
 .yellow { background: gold; }
+
+.binary-box {
+  background: linear-gradient(135deg, #0f2027, #203a43);
+  padding: 18px;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  font-weight: bold;
+  color: #00f5d4;
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.3);
+}
+
+.binary-box:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 200, 0.6);
+  transition: 0.3s ease;
+}

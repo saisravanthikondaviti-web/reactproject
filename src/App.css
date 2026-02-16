@@ -1,126 +1,122 @@
+/* .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
-  background: #0f172a;
-  color: white;
-  overflow: hidden;
-}
-
-.app {
-  min-height: 100vh;
-  position: relative;
-}
-
-/* NAVBAR */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 40px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  z-index: 10;
-  position: relative;
-}
-
-/* BACKGROUND BLOBS */
-.background-blur::before,
-.background-blur::after {
-  content: "";
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.5;
-  animation: float 10s infinite alternate ease-in-out;
-}
-
-.background-blur::before {
-  background: #6366f1;
-  top: -100px;
-  left: -100px;
-}
-
-.background-blur::after {
-  background: #ec4899;
-  bottom: -100px;
-  right: -100px;
-}
-
-@keyframes float {
-  from { transform: translateY(0px); }
-  to { transform: translateY(40px); }
-}
-
-/* GAME CONTAINER */
-.game-container {
-  height: calc(100vh - 80px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* PUZZLE CARD */
-.puzzle-card {
-  width: 450px;
-  padding: 50px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(25px);
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  transition: 0.4s ease;
-}
-
-.puzzle-card:hover {
-  transform: translateY(-5px);
-}
-
-.puzzle-card input {
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  outline: none;
-}
-
-/* FINAL OVERLAY */
-.final-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.final-box {
-  background: rgba(255,255,255,0.08);
-  padding: 60px;
-  border-radius: 30px;
-  backdrop-filter: blur(30px);
+  background-color: #0f172a;
+  color: #00ffcc;
+  font-family: "Courier New", monospace;
   text-align: center;
-  animation: fadeUp 0.8s ease;
 }
 
-@keyframes fadeUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+.container {
+  padding: 40px;
+}
+
+input {
+  padding: 8px;
+  margin: 10px;
+  background: black;
+  color: #00ffcc;
+  border: 1px solid #00ffcc;
 }
 
 button {
-  margin-top: 20px;
-  padding: 12px 30px;
-  border-radius: 20px;
+  padding: 8px 15px;
+  background: #00ffcc;
   border: none;
   cursor: pointer;
-  background: white;
-  color: black;
-  font-weight: 600;
-  transition: 0.3s;
+  margin-left: 10px;
 }
 
 button:hover {
-  transform: scale(1.05);
+  background: #00ccaa;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.box {
+  width: 80px;
+  height: 80px;
+  background: #111;
+  border: 2px solid #00ffcc;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.box:hover {
+  background: #003333;
+}
+
+.box.active {
+  background: #00ffcc;
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 100px);
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.color-box {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 10px;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.color-box.active {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.red { background: red; }
+.blue { background: blue; }
+.green { background: green; }
+.yellow { background: gold; }

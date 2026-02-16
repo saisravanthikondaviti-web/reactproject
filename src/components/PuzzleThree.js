@@ -48,28 +48,131 @@ function PuzzleThree({ onSuccess, onFail }) {
   }, [attempts]);
 
   return (
-    <div style={{ marginTop: "30px" }}>
-      <h2>🧠 AI Mind Challenge</h2>
-      <p>{currentRiddle.question}</p>
+    <div style={styles.wrapper}>
+      <div style={styles.card}>
+        <h2 style={styles.title}>🧠 AI Mind Challenge</h2>
 
-      <input
-        type="text"
-        placeholder="Type your answer..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
+        <p style={styles.question}>{currentRiddle.question}</p>
 
-      <div>
-        <button onClick={checkAnswer}>Submit</button>
-        <button onClick={() => setShowHint(true)}>Hint (-5 score)</button>
+        <input
+          type="text"
+          placeholder="Type your answer..."
+          value={input}
+          disabled={attempts === 0}
+          onChange={(e) => setInput(e.target.value)}
+          style={styles.input}
+        />
+
+        <div style={styles.buttonGroup}>
+          <button onClick={checkAnswer} style={styles.submitBtn}>
+            Submit
+          </button>
+
+          <button
+            onClick={() => setShowHint(true)}
+            style={styles.hintBtn}
+          >
+            Hint (-5 score)
+          </button>
+        </div>
+
+        {showHint && (
+          <p style={styles.hint}>💡 {currentRiddle.hint}</p>
+        )}
+
+        <div style={styles.footer}>
+          <span style={styles.attempts}>
+            Attempts Left: {attempts}
+          </span>
+        </div>
+
+        {message && <p style={styles.message}>{message}</p>}
       </div>
-
-      {showHint && <p>💡 Hint: {currentRiddle.hint}</p>}
-
-      <p>Attempts Left: {attempts}</p>
-      <p>{message}</p>
     </div>
   );
 }
+
+const styles = {
+  wrapper: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "40px"
+  },
+  card: {
+    width: "500px",
+    background: "linear-gradient(145deg, #111, #1a1a1a)",
+    padding: "30px",
+    borderRadius: "20px",
+    boxShadow: "0 0 25px rgba(0,255,255,0.2)",
+    color: "white",
+    textAlign: "center"
+  },
+  title: {
+    color: "#00f5ff",
+    marginBottom: "20px"
+  },
+  question: {
+    fontSize: "18px",
+    marginBottom: "20px",
+    color: "#ddd"
+  },
+  input: {
+    width: "100%",
+    padding: "12px",
+    borderRadius: "8px",
+    border: "2px solid #00f5ff",
+    backgroundColor: "#000",
+    color: "#00f5ff",
+    fontSize: "16px",
+    outline: "none",
+    marginBottom: "20px"
+  },
+  buttonGroup: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "15px"
+  },
+  submitBtn: {
+    flex: 1,
+    marginRight: "10px",
+    padding: "10px",
+    backgroundColor: "#00c853",
+    border: "none",
+    borderRadius: "8px",
+    color: "white",
+    fontWeight: "bold",
+    cursor: "pointer",
+    transition: "0.3s"
+  },
+  hintBtn: {
+    flex: 1,
+    padding: "10px",
+    backgroundColor: "#00bcd4",
+    border: "none",
+    borderRadius: "8px",
+    color: "black",
+    fontWeight: "bold",
+    cursor: "pointer"
+  },
+  hint: {
+    marginTop: "10px",
+    color: "#ffd54f",
+    fontStyle: "italic"
+  },
+  footer: {
+    marginTop: "15px"
+  },
+  attempts: {
+    backgroundColor: "#ff5252",
+    padding: "6px 12px",
+    borderRadius: "20px",
+    fontSize: "14px"
+  },
+  message: {
+    marginTop: "15px",
+    fontWeight: "bold",
+    color: "#00f5ff"
+  }
+};
 
 export default PuzzleThree;

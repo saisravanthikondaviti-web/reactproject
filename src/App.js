@@ -31,6 +31,8 @@ import PuzzleTwo from "./components/PuzzleTwo";
 import PuzzleThree from "./components/PuzzleThree";
 import PuzzleFour from "./components/PuzzleFour";
 import PuzzleFive from "./components/PuzzleFive";
+import MissionComplete from "./components/MissionComplete";
+
 
 import { Container, Row, Col, Card, Badge } from "react-bootstrap";
 
@@ -58,21 +60,23 @@ function App() {
     setScore((prev) => prev - 10);
   };
 
+  const resetGame = () => {
+  setLevel(1);
+  setScore(100);
+  setTimeLeft(180);
+  setGameOver(false);
+};
+
+
   if (gameOver) {
-    return (
-      <Container fluid className="vh-100 d-flex justify-content-center align-items-center bg-dark">
-        <Card className="text-center shadow-lg p-4" style={{ width: "30rem" }}>
-          <Card.Body>
-            <h1 className="text-danger">🎉 Mission Complete</h1>
-            <h3 className="mt-3">Final Score</h3>
-            <Badge bg="success" className="fs-4 p-3">
-              {score}
-            </Badge>
-          </Card.Body>
-        </Card>
-      </Container>
-    );
-  }
+  return (
+    <MissionComplete 
+      score={score}
+      onReplay={resetGame}
+    />
+  );
+}
+
 
  return (
   <Container fluid className="min-vh-100 d-flex align-items-center justify-content-center bg-dark py-5">

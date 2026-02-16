@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, Badge } from "react-bootstrap";
 
 function PuzzleFour({ onSuccess, onFail }) {
@@ -12,17 +12,23 @@ function PuzzleFour({ onSuccess, onFail }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [attempts, setAttempts] = useState(3);
 
-  useEffect(() => {
-    startRound();
+ 
+  const startRound = useCallback(() => {
+    setSequence((prevSequence) => {
+      const newColor = Math.floor(Math.random() * 4);
+      const newSequence = [...prevSequence, newColor];
+      setUserSequence([]);
+      playSequence(newSequence);
+      return newSequence;
+    });
   }, []);
 
-  const startRound = () => {
-    const newColor = Math.floor(Math.random() * 4);
-    const newSequence = [...sequence, newColor];
-    setSequence(newSequence);
-    setUserSequence([]);
-    playSequence(newSequence);
-  };
+
+   useEffect(() => {
+    startRound();
+  }, [startRound]);
+
+
 
   const playSequence = (seq) => {
     setIsPlaying(true);
@@ -70,44 +76,43 @@ function PuzzleFour({ onSuccess, onFail }) {
   };
 
 
-return (
-  <Card className="bg-black text-light border-0 shadow-lg rounded-4 p-4 mt-4">
-    <Card.Body className="text-center">
+  return (
+    <Card className="bg-black text-light border-0 shadow-lg rounded-4 p-4 mt-4">
+      <Card.Body className="text-center">
 
-      <h2 className="fw-bold text-warning mb-3">
-        ⚡ Memory Reactor Override
-      </h2>
+        <h2 className="fw-bold text-warning mb-3">
+          ⚡ Memory Reactor Override
+        </h2>
 
-      {/* Status Row */}
-      <div className="d-flex justify-content-center gap-4 mb-3 flex-wrap">
-        <Badge bg="info" className="px-3 py-2 fs-6">
-          🔁 Round: {round}
-        </Badge>
+        {/* Status Row */}
+        <div className="d-flex justify-content-center gap-4 mb-3 flex-wrap">
+          <Badge bg="info" className="px-3 py-2 fs-6">
+            🔁 Round: {round}
+          </Badge>
 
-        <Badge bg="danger" className="px-3 py-2 fs-6">
-          ❤️ Attempts: {attempts}
-        </Badge>
-      </div>
+          <Badge bg="danger" className="px-3 py-2 fs-6">
+            ❤️ Attempts: {attempts}
+          </Badge>
+        </div>
 
-      {/* Message */}
-      <p className="fs-5 mb-4 text-secondary">{message}</p>
+        {/* Message */}
+        <p className="fs-5 mb-4 text-secondary">{message}</p>
 
-      {/* Color Grid */}
-      <div className="color-grid">
-        {colors.map((color, index) => (
-          <div
-            key={index}
-            className={`color-box ${color} ${
-              activeIndex === index ? "active" : ""
-            }`}
-            onClick={() => handleClick(index)}
-          />
-        ))}
-      </div>
+        {/* Color Grid */}
+        <div className="color-grid">
+          {colors.map((color, index) => (
+            <div
+              key={index}
+              className={`color-box ${color} ${activeIndex === index ? "active" : ""
+                }`}
+              onClick={() => handleClick(index)}
+            />
+          ))}
+        </div>
 
-    </Card.Body>
-  </Card>
-);
+      </Card.Body>
+    </Card>
+  );
 
 }
 

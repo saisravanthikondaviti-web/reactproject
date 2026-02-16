@@ -32,13 +32,13 @@ import PuzzleThree from "./components/PuzzleThree";
 import PuzzleFour from "./components/PuzzleFour";
 import PuzzleFive from "./components/PuzzleFive";
 
+import { Container, Row, Col, Card, Badge } from "react-bootstrap";
+
 function App() {
   const [level, setLevel] = useState(1);
   const [score, setScore] = useState(100);
   const [timeLeft, setTimeLeft] = useState(180);
   const [gameOver, setGameOver] = useState(false);
-  const [gameFinished, setGameFinished] = useState(false);
-  const [startTime] = useState(Date.now());
 
   useEffect(() => {
     if (timeLeft <= 0) {
@@ -46,12 +46,11 @@ function App() {
     }
   }, [timeLeft]);
 
-  // 🔥 FIXED LOGIC HERE
   const nextLevel = () => {
-    if (level < 5) {
-      setLevel((prev) => prev + 1);
+    if (level === 5) {
+      setGameOver(true);
     } else {
-      setGameFinished(true); // STOP at Level 5
+      setLevel((prev) => prev + 1);
     }
   };
 
@@ -59,68 +58,83 @@ function App() {
     setScore((prev) => prev - 10);
   };
 
-  // 💀 GAME OVER SCREEN
   if (gameOver) {
     return (
-      <div className="container">
-        <h1>💀 SYSTEM LOCKED</h1>
-        <h2>Your Score: {score}</h2>
-      </div>
-    );
-  }
-
-  // 🏆 FINAL SUCCESS SCREEN
-  if (gameFinished) {
-    const finalTime = Math.floor((Date.now() - startTime) / 1000);
-
-    return (
-      <div className="final-screen">
-        <div className="final-card">
-          <h1 className="glitch">ACCESS GRANTED</h1>
-
-          <div className="final-stats">
-            <p>🏆 Total Score: {score}</p>
-            <p>⏳ Final Time: {finalTime}s</p>
-          </div>
-
-          <button onClick={() => window.location.reload()}>
-            Restart Mission
-          </button>
-        </div>
-      </div>
+      <Container fluid className="vh-100 d-flex justify-content-center align-items-center bg-dark">
+        <Card className="text-center shadow-lg p-4" style={{ width: "30rem" }}>
+          <Card.Body>
+            <h1 className="text-danger">🎉 Mission Complete</h1>
+            <h3 className="mt-3">Final Score</h3>
+            <Badge bg="success" className="fs-4 p-3">
+              {score}
+            </Badge>
+          </Card.Body>
+        </Card>
+      </Container>
     );
   }
 
   return (
-    <div className="container">
-      <h1>🧑‍💻 Escape The Hacker Lab</h1>
+    <Container fluid className="bg-dark text-light min-vh-100 py-5">
+      <Row className="justify-content-center">
+        <Col md={8}>
+          <Card className="shadow-lg p-4 bg-secondary text-light">
+            <Card.Body>
 
-      <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} />
+              {/* Header */}
+              <h1 className="text-center mb-4">
+                🧑‍💻 Escape The Hacker Lab
+              </h1>
 
-      <p>Level: {level}</p>
-      <p>Score: {score}</p>
+              {/* Status Bar */}
+              <Row className="mb-3 text-center">
+                <Col>
+                  <Badge bg="info" className="p-2 fs-6">
+                    ⏳ Time: {timeLeft}s
+                  </Badge>
+                </Col>
+                <Col>
+                  <Badge bg="warning" className="p-2 fs-6 text-dark">
+                    🎯 Level: {level}
+                  </Badge>
+                </Col>
+                <Col>
+                  <Badge bg="success" className="p-2 fs-6">
+                    💰 Score: {score}
+                  </Badge>
+                </Col>
+              </Row>
 
-      {level === 1 && (
-        <PuzzleOne onSuccess={nextLevel} onFail={reduceScore} />
-      )}
+              {/* Timer */}
+              <Timer timeLeft={timeLeft} setTimeLeft={setTimeLeft} />
 
-      {level === 2 && (
-        <PuzzleTwo onSuccess={nextLevel} onFail={reduceScore} />
-      )}
+              {/* Puzzle Area */}
+              <div className="mt-4">
+                {level === 1 && (
+                  <PuzzleOne onSuccess={nextLevel} onFail={reduceScore} />
+                )}
+                {level === 2 && (
+                  <PuzzleTwo onSuccess={nextLevel} onFail={reduceScore} />
+                )}
+                {level === 3 && (
+                  <PuzzleThree onSuccess={nextLevel} onFail={reduceScore} />
+                )}
+                {level === 4 && (
+                  <PuzzleFour onSuccess={nextLevel} onFail={reduceScore} />
+                )}
+                {level === 5 && (
+                  <PuzzleFive onSuccess={nextLevel} onFail={reduceScore} />
+                )}
+              </div>
 
-      {level === 3 && (
-        <PuzzleThree onSuccess={nextLevel} onFail={reduceScore} />
-      )}
-
-      {level === 4 && (
-        <PuzzleFour onSuccess={nextLevel} onFail={reduceScore} />
-      )}
-
-      {level === 5 && (
-        <PuzzleFive onSuccess={nextLevel} onFail={reduceScore} />
-      )}
-    </div>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
 export default App;
+
+

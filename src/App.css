@@ -1,50 +1,122 @@
-.final-screen {
-  height: 100vh;
-  background: #050a18;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.final-card {
-  background: rgba(0,255,247,0.05);
-  border: 1px solid rgba(0,255,247,0.3);
-  padding: 60px;
+/* .App {
   text-align: center;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 0 40px rgba(0,255,247,0.3);
 }
 
-.final-card h1 {
-  font-size: 2.5rem;
-  color: #00fff7;
-  text-shadow: 0 0 20px #00fff7;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-.final-stats {
-  margin: 30px 0;
-  font-size: 1.2rem;
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
-.final-card button {
-  padding: 12px 30px;
-  background: #00fff7;
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+body {
+  margin: 0;
+  background-color: #0f172a;
+  color: #00ffcc;
+  font-family: "Courier New", monospace;
+  text-align: center;
+}
+
+.container {
+  padding: 40px;
+}
+
+input {
+  padding: 8px;
+  margin: 10px;
+  background: black;
+  color: #00ffcc;
+  border: 1px solid #00ffcc;
+}
+
+button {
+  padding: 8px 15px;
+  background: #00ffcc;
   border: none;
   cursor: pointer;
-  font-weight: bold;
+  margin-left: 10px;
+}
+
+button:hover {
+  background: #00ccaa;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.box {
+  width: 80px;
+  height: 80px;
+  background: #111;
+  border: 2px solid #00ffcc;
+  cursor: pointer;
   transition: 0.3s;
 }
 
-.final-card button:hover {
-  box-shadow: 0 0 20px #00fff7;
+.box:hover {
+  background: #003333;
 }
 
-.glitch {
-  animation: glitch 1s infinite;
+.box.active {
+  background: #00ffcc;
 }
 
-@keyframes glitch {
-  0% { text-shadow: 2px 0 red, -2px 0 blue; }
-  50% { text-shadow: -2px 0 red, 2px 0 blue; }
-  100% { text-shadow: 2px 0 red, -2px 0 blue; }
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 100px);
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
 }
+
+.color-box {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 10px;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.color-box.active {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.red { background: red; }
+.blue { background: blue; }
+.green { background: green; }
+.yellow { background: gold; }

@@ -23,7 +23,6 @@
 // }
 
 // export default App;
-
 import { useState, useEffect } from "react";
 import "./App.css";
 import Timer from "./components/Timer";
@@ -33,15 +32,13 @@ import PuzzleThree from "./components/PuzzleThree";
 import PuzzleFour from "./components/PuzzleFour";
 import PuzzleFive from "./components/PuzzleFive";
 
-
-
-
-
 function App() {
   const [level, setLevel] = useState(1);
   const [score, setScore] = useState(100);
   const [timeLeft, setTimeLeft] = useState(180);
   const [gameOver, setGameOver] = useState(false);
+  const [gameFinished, setGameFinished] = useState(false);
+  const [startTime] = useState(Date.now());
 
   useEffect(() => {
     if (timeLeft <= 0) {
@@ -49,19 +46,47 @@ function App() {
     }
   }, [timeLeft]);
 
+  // 🔥 FIXED LOGIC HERE
   const nextLevel = () => {
-    setLevel((prev) => prev + 1);
+    if (level < 5) {
+      setLevel((prev) => prev + 1);
+    } else {
+      setGameFinished(true); // STOP at Level 5
+    }
   };
 
   const reduceScore = () => {
     setScore((prev) => prev - 10);
   };
 
+  // 💀 GAME OVER SCREEN
   if (gameOver) {
     return (
       <div className="container">
         <h1>💀 SYSTEM LOCKED</h1>
         <h2>Your Score: {score}</h2>
+      </div>
+    );
+  }
+
+  // 🏆 FINAL SUCCESS SCREEN
+  if (gameFinished) {
+    const finalTime = Math.floor((Date.now() - startTime) / 1000);
+
+    return (
+      <div className="final-screen">
+        <div className="final-card">
+          <h1 className="glitch">ACCESS GRANTED</h1>
+
+          <div className="final-stats">
+            <p>🏆 Total Score: {score}</p>
+            <p>⏳ Final Time: {finalTime}s</p>
+          </div>
+
+          <button onClick={() => window.location.reload()}>
+            Restart Mission
+          </button>
+        </div>
       </div>
     );
   }
@@ -94,12 +119,8 @@ function App() {
       {level === 5 && (
         <PuzzleFive onSuccess={nextLevel} onFail={reduceScore} />
       )}
-
-
-
     </div>
   );
 }
 
 export default App;
-

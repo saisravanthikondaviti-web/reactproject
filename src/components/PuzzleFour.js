@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Card, Badge } from "react-bootstrap";
 
 function PuzzleFour({ onSuccess, onFail }) {
   const colors = ["red", "blue", "green", "yellow"];
@@ -68,13 +69,30 @@ function PuzzleFour({ onSuccess, onFail }) {
     }
   };
 
-  return (
-    <div style={{ marginTop: "30px" }}>
-      <h2>⚡ Memory Reactor Override</h2>
-      <p>Round: {round}</p>
-      <p>Attempts Left: {attempts}</p>
-      <p>{message}</p>
 
+return (
+  <Card className="bg-black text-light border-0 shadow-lg rounded-4 p-4 mt-4">
+    <Card.Body className="text-center">
+
+      <h2 className="fw-bold text-warning mb-3">
+        ⚡ Memory Reactor Override
+      </h2>
+
+      {/* Status Row */}
+      <div className="d-flex justify-content-center gap-4 mb-3 flex-wrap">
+        <Badge bg="info" className="px-3 py-2 fs-6">
+          🔁 Round: {round}
+        </Badge>
+
+        <Badge bg="danger" className="px-3 py-2 fs-6">
+          ❤️ Attempts: {attempts}
+        </Badge>
+      </div>
+
+      {/* Message */}
+      <p className="fs-5 mb-4 text-secondary">{message}</p>
+
+      {/* Color Grid */}
       <div className="color-grid">
         {colors.map((color, index) => (
           <div
@@ -86,8 +104,11 @@ function PuzzleFour({ onSuccess, onFail }) {
           />
         ))}
       </div>
-    </div>
-  );
+
+    </Card.Body>
+  </Card>
+);
+
 }
 
 export default PuzzleFour;

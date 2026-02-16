@@ -136,3 +136,34 @@ button:hover {
   box-shadow: 0 0 25px rgba(0, 255, 200, 0.6);
   transition: 0.3s ease;
 }
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 120px);
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.color-box {
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+.color-box.active {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px white;
+}
+
+.red { background-color: #ff4d4d; }
+.blue { background-color: #3399ff; }
+.green { background-color: #33cc66; }
+.yellow { background-color: #ffcc00; }
+
+.color-box:hover {
+  transform: scale(1.05);
+}
